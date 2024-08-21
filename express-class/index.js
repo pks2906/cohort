@@ -67,29 +67,47 @@
 // })
 // app.listen(3000);
 
+// const express = require("express");
+
+// const app = express();
+
+// app.get("/health-checkup", function (req, res){
+//   const username = req.headers.username;
+//   const password = req.headers.password;
+//   const kidneyId = req.query.kidneyId;
+
+//   if(username === "pratik" && password === "pass") {
+//     if (kidneyId == 1 || kidneyId == 2){
+//       // do something with kidney here
+//       res.json({
+//         msg: "Your kidney is healthy!"
+//       })
+      
+//     } else {
+      
+//     }
+    
+    
+//   }
+//   res.status(400).json({"msg": "Somethings up with your inputs"})
+// });
+
+// app.listen(3000);
+
 const express = require("express");
 
 const app = express();
 
-app.get("/health-checkup", function (req, res){
-  const username = req.headers.username;
-  const password = req.headers.password;
-  const kidneyId = req.query.kidneyId;
+app.get("/health-checkup", function (req, res, next){
+  console.log("hi from req1")
+  next();
+}, function(req, res, next){
+  console.log("hi from req2")
 
-  if(username === "pratik" && password === "pass") {
-    if (kidneyId == 1 || kidneyId == 2){
-      // do something with kidney here
-      res.json({
-        msg: "Your kidney is healthy!"
-      })
-      
-    } else {
-      
-    }
-    
-    
-  }
-  res.status(400).json({"msg": "Somethings up with your inputs"})
+}, function(req, res){
+  console.log("hi from req2")
+  
+  
 });
 
-app.listen(3000);
+app.listen(3000)
