@@ -110,4 +110,4 @@ app.get("/health-checkup", function (req, res, next){
   
 });
 
-app.listen(3000)
+app.listen(3000);
