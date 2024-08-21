@@ -158,12 +158,12 @@ const schema = zod.array(zod.number());
 
 const schema = zod.object({
   email: zod.string(),
-  password: z.string(),
-  country: z.literal("IN").or(z.literal("US")),
-  kidneys: z.array(z.number())  
+  password: zod.string(),
+  country: zod.literal("IN").or(zod.literal("US")),
+  kidneys: zod.array(z.number())  
 })
 
-app.use(express.json());
+app.use(express.json());  
 
 app.post("/health-checkup", function (req, res) {
   // kidneys = [1,2]
