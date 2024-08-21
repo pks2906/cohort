@@ -94,20 +94,50 @@
 
 // app.listen(3000);
 
+// const express = require("express");
+
+// const app = express();
+
+// app.get("/health-checkup", function (req, res, next){
+//   console.log("hi from req1")
+//   next();
+// }, function(req, res, next){
+//   console.log("hi from req2")
+
+// }, function(req, res){
+//   console.log("hi from req2")
+  
+  
+// });
+
+// app.listen(3000);
+
 const express = require("express");
 
 const app = express();
 
-app.get("/health-checkup", function (req, res, next){
-  console.log("hi from req1")
+//rate limitting
+let numberOfRequests = 0;
+function calculateRequests(req, res, next){
+  numberOfRequests++;
+  console.log(numberOfRequests);
   next();
-}, function(req, res, next){
-  console.log("hi from req2")
+}
 
-}, function(req, res){
-  console.log("hi from req2")
+app.use(calculateRequests)
+
+
+app.post("/health-checkup", function (req, res){
+  res.json({
+    msg: "hi there!"
+  })
   
+  
+})
+
+app.get("/health-checkup2", function (req, res){
   
 });
 
 app.listen(3000);
+
