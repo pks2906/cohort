@@ -112,33 +112,52 @@
 
 // app.listen(3000);
 
-const express = require("express");
+// const express = require("express");
 
+// const app = express();
+
+// //rate limitting
+// let numberOfRequests = 0;
+// function calculateRequests(req, res, next){
+//   numberOfRequests++;
+//   console.log(numberOfRequests);
+//   next();
+// }
+
+// app.use(calculateRequests)
+
+
+// app.post("/health-checkup", function (req, res){
+//   res.json({
+//     msg: "hi there!"
+//   })
+  
+  
+// })       
+
+
+// app.get("/health-checkup2", function (req, res){
+  
+// });
+
+// app.listen(3000);
+
+const express = require("express");
+const zod = require("zod")
 const app = express();
 
-//rate limitting
-let numberOfRequests = 0;
-function calculateRequests(req, res, next){
-  numberOfRequests++;
-  console.log(numberOfRequests);
-  next();
-}
+const schema = zod.array(zod.number());
 
-app.use(calculateRequests)
+app.use(express.json());
 
-
-app.post("/health-checkup", function (req, res){
-  res.json({
-    msg: "hi there!"
+app.post("/health-checkup", function (req, res) {
+  // kidneys = [1,2]
+  const kidneys = req.body.kidneys;
+  const response = schema.safeParse(kidneys)
+  res.send({
+    response 
   })
-  
-  
-})       
-
-
-app.get("/health-checkup2", function (req, res){
-  
+ 
 });
 
 app.listen(3000);
-
